@@ -1,0 +1,14 @@
+<animals>
+    <animal>
+        <type>dog</type>
+        <name>Jack</name>
+        <sex>Male</sex>
+        <age>10</age>
+    </animal>
+    <animal>
+        <type>cat</type>
+        <name>Midnight</name>
+        <sex>Female</sex>
+        <age>13</age>
+    </animal>
+</animals>

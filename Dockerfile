@@ -7,7 +7,8 @@ RUN apt-get install -y python3-pip
 COPY . .
 RUN ([ -f requirements.txt ] \
     && pip3 install --no-cache-dir -r requirements.txt) \
-        || pip3 install --no-cache-dir jupyter jupyterlab
+        || pip3 install --no-cache-dir jupyter jupyterlabnbtutor 
+
 
 USER root
 
