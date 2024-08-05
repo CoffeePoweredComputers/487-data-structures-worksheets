@@ -1,13 +1,18 @@
 FROM openjdk:11-jdk
 
 RUN apt-get update
-RUN apt-get install -y python3-pip
+RUN apt-get install -y python3-pip python3-dev build-essential
 
-# add requirements.txt, written this way to gracefully ignore a missing file
+# Install specific versions of setuptools and wheel to avoid compatibility issues
+RUN pip3 install --upgrade pip setuptools wheel
+
+# Add requirements.txt, written this way to gracefully ignore a missing file
 COPY . .
 RUN ([ -f requirements.txt ] \
     && pip3 install --no-cache-dir -r requirements.txt) \
-        || pip3 install --no-cache-dir jupyter jupyterlabnbtutor 
+        || (pip3 install --no-cache-dir jupyter && \
+            pip3 install --no-cache-dir jupyterlab && \
+            pip3 install --no-cache-dir nbtutor)
 
 USER root
 
@@ -37,6 +42,7 @@ USER $NB_USER
 # Launch the notebook server
 WORKDIR $HOME
 CMD ["jupyter", "notebook", "--ip", "0.0.0.0"]
+
 
 
 # Launch the notebook server
